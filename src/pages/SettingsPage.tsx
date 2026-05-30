@@ -3,9 +3,8 @@ import { OpenCrmSectionHeader } from '../components/opencrm/shared'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
 import { hasInsforgeEnv } from '../lib/insforge'
-import { WhatsAppQrGate } from '../components/WhatsAppQrGate'
 
-export default function SettingsPage({ waStatus, qrCode }: { waStatus: string, qrCode: string }) {
+export default function SettingsPage({ waStatus }: { waStatus: string }) {
   return (
     <main className="ocm-page">
       <OpenCrmSectionHeader title="Settings" subtitle="Konfigurasi sistem dan integrasi." />
@@ -37,13 +36,6 @@ export default function SettingsPage({ waStatus, qrCode }: { waStatus: string, q
           </div>
         </Card>
       </div>
-
-      {/* QR Code component is hidden as requested */}
-      {/* waStatus !== 'Connected' && (
-        <div className="mb-8">
-          <WhatsAppQrGate qrCode={qrCode} status={waStatus} />
-        </div>
-      ) */}
 
       <div className="ocm-grid-2">
         <Card className="p-6">

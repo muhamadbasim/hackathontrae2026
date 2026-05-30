@@ -3,11 +3,10 @@ import { OpenCrmSectionHeader } from '../components/opencrm/shared'
 import { KpiCards } from '../components/KpiCards'
 import { CampaignTable } from '../components/CampaignTable'
 import { AlertSender } from '../components/AlertSender'
-import { WhatsAppQrGate } from '../components/WhatsAppQrGate'
 import { Badge } from '../components/ui/Badge'
 import { crmApi } from '../lib/api'
 
-export default function DashboardPage({ waStatus, qrCode }: { waStatus: string, qrCode: string }) {
+export default function DashboardPage({ waStatus }: { waStatus: string }) {
   const [metrics, setMetrics] = useState<any>({})
   const [campaigns, setCampaigns] = useState<any[]>([])
 
@@ -28,13 +27,6 @@ export default function DashboardPage({ waStatus, qrCode }: { waStatus: string, 
           </div>
         }
       />
-      
-      {/* QR Code component is hidden as requested */}
-      {/* waStatus !== 'Connected' && (
-        <div className="mb-8">
-          <WhatsAppQrGate qrCode={qrCode} status={waStatus} />
-        </div>
-      ) */}
 
       <KpiCards metrics={metrics} />
       
