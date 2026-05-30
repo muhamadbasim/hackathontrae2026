@@ -68,6 +68,61 @@ npm run worker
 npm run dev:all
 ```
 
+## Tutorial WhatsApp (Scan QR + Chat Demo)
+
+Fitur WhatsApp di project ini memakai Baileys (unofficial). Cocok untuk demo/prototyping.
+
+### 1) Jalankan worker + frontend
+
+```bash
+npm run dev:all
+```
+
+- Frontend default: http://localhost:5173
+- Worker default: http://localhost:3001
+
+### 2) Masuk ke aplikasi (Demo Mode)
+
+Jika env InsForge belum diisi, aplikasi akan menampilkan layar “Setup Required”.
+- Klik “Continue in Demo Mode”
+
+### 3) Hubungkan WhatsApp via QR
+
+Di aplikasi:
+- Buka menu Settings
+- Di bagian “WhatsApp Connection”, klik “Connect WhatsApp”
+- Akan muncul QR Code
+
+Di WhatsApp (HP):
+- Buka WhatsApp → Linked devices (Perangkat tertaut) → Link a device
+- Scan QR Code yang tampil di aplikasi
+
+Jika berhasil:
+- Status berubah menjadi “Connected”
+
+### 4) Coba chat bot (contoh seperti screenshot)
+
+Setelah WhatsApp tersambung, kamu bisa uji chat dengan cara:
+- Gunakan akun WhatsApp lain untuk mengirim pesan ke nomor WhatsApp yang sedang tersambung
+
+Keyword demo yang sudah tersedia di worker:
+- `halo` / `hai` / `menu`: menampilkan menu bantuan
+- `1` / `info`: contoh insight performa campaign
+- `3` / `pause`: contoh aksi “pause campaign”
+- `ping`: balasan cepat “pong”
+
+### 5) Troubleshooting
+
+- Tidak muncul QR / status Error:
+  - Pastikan worker hidup (`npm run worker` atau `npm run dev:all`)
+  - Pastikan port worker `3001` tidak dipakai aplikasi lain
+  - Jika tombol “Regenerate QR” tidak bekerja: endpoint yang dipakai adalah `POST http://localhost:3001/regenerate`
+- QR kadaluarsa:
+  - Klik “Regenerate QR” atau refresh halaman Settings
+- Mau reset koneksi (logout paksa):
+  - Worker menyimpan session Baileys di folder `worker/auth_info_baileys`
+  - Hapus folder tersebut lalu jalankan ulang worker untuk generate QR baru
+
 ## Scripts
 
 - dev: Menjalankan Vite dev server
