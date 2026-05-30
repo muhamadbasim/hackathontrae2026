@@ -1,0 +1,71 @@
+.ocm-shell {
+  @apply flex h-screen w-full overflow-hidden bg-background;
+}
+
+.ocm-page {
+  @apply flex-1 overflow-y-auto p-4 md:p-8;
+}
+
+.ocm-card {
+  @apply rounded-xl border border-border bg-card text-card-foreground shadow-sm;
+}
+
+.ocm-card-header {
+  @apply flex flex-col space-y-1.5 p-6;
+}
+
+.ocm-card-title {
+  @apply text-lg font-semibold leading-none tracking-tight;
+}
+
+.ocm-card-body {
+  @apply p-6 pt-0;
+}
+
+.ocm-btn {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2;
+}
+
+.ocm-btn-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.ocm-tag {
+  @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+}
+
+.ocm-grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+.ocm-grid-3 {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+}
+
+.ocm-grid-4 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.ocm-table {
+  @apply w-full caption-bottom text-sm;
+}
+
+.ocm-input {
+  @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.ocm-textarea {
+  @apply flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.ocm-select {
+  @apply flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.ocm-section-title {
+  @apply text-2xl font-bold tracking-tight;
+}
+
+.ocm-section-subtitle {
+  @apply text-sm text-muted-foreground;
+}
