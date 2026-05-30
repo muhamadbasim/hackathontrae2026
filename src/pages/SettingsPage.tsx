@@ -38,11 +38,12 @@ export default function SettingsPage({ waStatus, qrCode }: { waStatus: string, q
         </Card>
       </div>
 
-      {waStatus !== 'Connected' && (
+      {/* QR Code component is hidden as requested */}
+      {/* waStatus !== 'Connected' && (
         <div className="mb-8">
           <WhatsAppQrGate qrCode={qrCode} status={waStatus} />
         </div>
-      )}
+      ) */}
 
       <div className="ocm-grid-2">
         <Card className="p-6">

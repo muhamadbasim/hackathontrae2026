@@ -29,11 +29,12 @@ export default function DashboardPage({ waStatus, qrCode }: { waStatus: string, 
         }
       />
       
-      {waStatus !== 'Connected' && (
+      {/* QR Code component is hidden as requested */}
+      {/* waStatus !== 'Connected' && (
         <div className="mb-8">
           <WhatsAppQrGate qrCode={qrCode} status={waStatus} />
         </div>
-      )}
+      ) */}
 
       <KpiCards metrics={metrics} />
       
