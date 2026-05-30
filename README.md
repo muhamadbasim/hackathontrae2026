@@ -2,6 +2,12 @@
 
 Aplikasi CRM WhatsApp dengan mockup UI (Inbox, Handover, Orders, Customers, Broadcast, Workflow, AI Agents) dan worker WhatsApp untuk simulasi koneksi WhatsApp (QR) + sinkronisasi ke InsForge (opsional).
 
+## Capture
+
+| WhatsApp Chat Demo | Dashboard Menu |
+| --- | --- |
+| ![WhatsApp Chat Demo](https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=realistic%20whatsapp%20desktop%20screenshot%20light%20theme%20chat%20conversation%20in%20Indonesian%20between%20user%20and%20crm%20assistant%20messages%20halo%20menu%20list%20campaign%20info%20Pause%20confirmation%20clean%20UI%20high%20detail&image_size=landscape_16_9) | ![Dashboard Menu](https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=realistic%20web%20dashboard%20screenshot%20for%20whatsapp%20crm%20agent%20sidebar%20menu%20items%20Dashboard%20Inbox%20Handover%20Orders%20Pelanggan%20Products%20Broadcast%20Workflow%20AI%20Agents%20Knowledge%20Settings%20orange%20accent%20clean%20modern%20UI%20high%20detail&image_size=landscape_16_9) |
+
 ## Fitur Utama
 
 - Dashboard & navigasi CRM
