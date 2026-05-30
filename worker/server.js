@@ -4,7 +4,8 @@ const cors = require('cors')
 const http = require('http')
 const { Server } = require('socket.io')
 const pino = require('pino')
-const { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion } = require('@whiskeysockets/baileys')
+const { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = require('@whiskeysockets/baileys')
+const NodeCache = require('node-cache')
 const fs = require('fs')
 
 const PORT = process.env.WA_WORKER_PORT || 3001
@@ -15,6 +16,9 @@ const hasInsforgeEnv = Boolean(
   process.env.INSFORGE_ANON_KEY &&
   !String(process.env.INSFORGE_BASE_URL).includes('your-project')
 )
+
+// Setup NodeCache for Baileys
+const msgRetryCounterCache = new NodeCache()
 
 let insforge = null;
 import('@insforge/sdk').then(({ createClient }) => {
@@ -48,8 +52,12 @@ async function startSock() {
   
   sock = makeWASocket({
     version,
-    auth: state,
+    auth: {
+      creds: state.creds,
+      keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' })),
+    },
     printQRInTerminal: false,
+    msgRetryCounterCache,
     logger: pino({ level: 'silent' })
   })
   
