@@ -699,14 +699,14 @@ pong
 Reply exactly:
 
 ```text
-Halo! Saya Autonomous CRM Agent.
+Halo! 👋 Saya asisten CRM kamu. Ada yang bisa saya bantu hari ini?
 
-Pilih menu:
-1. Info performa campaign
+Kamu bisa coba beberapa hal ini:
+1. Cek performa campaign
 2. Buat campaign baru
-3. Pause ad bermasalah
+3. Pause ad yang bermasalah
 
-Balas angka atau keyword.
+Balas angka atau keyword aja ya.
 ```
 
 #### `1`, `info`
@@ -714,11 +714,11 @@ Balas angka atau keyword.
 Reply exactly:
 
 ```text
-⚠️ Alert CRM + Ads:
-CPL campaign "Diskon Umum" naik 37% dibanding baseline.
-Lead qualified turun ke 42%.
+Eh, ada info penting nih! ⚠️
 
-Rekomendasi: balas "Pause" untuk menghentikan creative bermasalah.
+CPL buat campaign "Diskon Umum" lagi naik 37% dari biasanya, terus lead qualified-nya malah turun ke 42%.
+
+Mending kita "Pause" aja dulu gimana? Biar budgetnya nggak boncos.
 ```
 
 #### `2`, `buat`
@@ -726,8 +726,9 @@ Rekomendasi: balas "Pause" untuk menghentikan creative bermasalah.
 Reply exactly:
 
 ```text
-Baik, kita buat campaign baru.
-Berapa budget harian? Contoh: 150000
+Siap, ayo kita bikin campaign baru! 🚀
+
+Kira-kira mau pasang budget berapa per harinya? Kasih tau aja angkanya, misal 150000.
 ```
 
 #### budget detection
@@ -741,8 +742,9 @@ Condition:
 Reply exactly:
 
 ```text
-Budget tercatat.
-Siapa target audiensnya? Contoh: Wanita 25-35, Jakarta.
+Oke, budget udah dicatat ya. 👌
+
+Terus, siapa nih target audiensnya? Kasih tau kriteria spesifiknya, misal: Wanita 25-35 di Jakarta.
 ```
 
 #### audience detection
@@ -756,12 +758,13 @@ pria, wanita, indonesia, jakarta, bandung, surabaya
 Reply exactly:
 
 ```text
-Draft Campaign:
-Objective: Leads
-Audience: sesuai input Anda
-Copy: Dapatkan penawaran terbaik hari ini. Klik WhatsApp untuk konsultasi gratis.
+Sip! Ini draft campaign-nya:
 
-Balas "Launch" untuk menjalankan campaign.
+🎯 Objective: Leads
+👥 Audience: sesuai yang kamu minta tadi
+📝 Copy: "Dapatkan penawaran terbaik hari ini. Klik WhatsApp untuk konsultasi gratis."
+
+Kalau udah oke, balas "Launch" ya buat kita jalanin sekarang.
 ```
 
 #### `launch`
@@ -769,8 +772,9 @@ Balas "Launch" untuk menjalankan campaign.
 Reply exactly:
 
 ```text
-🚀 Campaign berhasil diluncurkan ke Meta Ads!
-Saya akan pantau CPL dan kualitas leads secara otomatis.
+🚀 Mantap! Campaign-nya udah jalan di Meta Ads ya.
+
+Tenang aja, bakal aku pantau terus CPL sama kualitas lead-nya secara otomatis. Nanti aku kabarin kalau ada apa-apa!
 ```
 
 #### `3`, `pause`
@@ -778,8 +782,9 @@ Saya akan pantau CPL dan kualitas leads secara otomatis.
 Reply exactly:
 
 ```text
-✅ Done! Creative 'Diskon Umum' telah di-pause.
-Saya akan terus memantau campaign lainnya.
+✅ Siap, creative 'Diskon Umum' udah aku pause ya.
+
+Aku lanjut pantau campaign lainnya, kalau ada kendala lagi langsung aku infoin!
 ```
 
 #### fallback
@@ -787,7 +792,9 @@ Saya akan terus memantau campaign lainnya.
 Reply exactly:
 
 ```text
-Saya belum paham. Balas "menu" untuk melihat pilihan yang tersedia.
+Aduh, maaf ya aku kurang paham maksudnya. 😅
+
+Boleh balas "menu" aja biar kita liat apa aja yang bisa aku bantu?
 ```
 
 ### 5.5 InsForge Sync From Worker

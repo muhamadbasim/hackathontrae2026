@@ -16,10 +16,10 @@ import {
 export type OpenCrmNavGroup = 'operasional' | 'data' | 'outreach' | 'otomasi'
 
 export const OPENCRM_GROUP_LABELS: Record<OpenCrmNavGroup, string> = {
-  operasional: 'Operasional',
-  data: 'Data',
-  outreach: 'Outreach',
-  otomasi: 'Otomasi',
+  operasional: 'OPERASIONAL',
+  data: 'DATA',
+  outreach: 'OUTREACH',
+  otomasi: 'OTOMASI',
 }
 
 export const OPENCRM_NAV_ITEMS = [

@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# Autonomous Leads and Customer Relationship Management WhatsApp Agent
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikasi CRM WhatsApp dengan mockup UI (Inbox, Handover, Orders, Customers, Broadcast, Workflow, AI Agents) dan worker WhatsApp untuk simulasi koneksi WhatsApp (QR) + sinkronisasi ke InsForge (opsional).
 
-Currently, two official plugins are available:
+## Fitur Utama
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Dashboard & navigasi CRM
+- Inbox WhatsApp (mock data)
+- Handover queue (mock data)
+- Customers & Orders (mock data)
+- Broadcast (mockup)
+- Workflow & AI pages (mockup)
+- WhatsApp Worker (QR + status via Socket.IO)
+- Integrasi InsForge (opsional, via env var)
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Frontend: React + TypeScript + Vite
+- UI: TailwindCSS, lucide-react
+- Worker: Node.js + Express + Socket.IO
+- Backend (opsional): InsForge
 
-## Expanding the ESLint configuration
+## Menjalankan Secara Lokal
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prasyarat
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Pastikan sudah ter-install:
+- Node.js 18+ (disarankan)
+- npm
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Install dependency
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment Variables (opsional)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Frontend (Vite):
+- VITE_INSFORGE_BASE_URL
+- VITE_INSFORGE_ANON_KEY
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Worker (Node.js):
+- INSFORGE_BASE_URL
+- INSFORGE_ANON_KEY
+- WA_WORKER_PORT (default: 3001)
+- FRONTEND_ORIGIN (default: http://localhost:5173)
+
+Catatan:
+- Jika env InsForge belum diisi, aplikasi tetap bisa jalan dengan mode demo.
+- Jangan pernah commit file .env yang berisi key asli.
+
+### Jalankan frontend saja
+
+```bash
+npm run dev
 ```
+
+### Jalankan worker saja
+
+```bash
+npm run worker
+```
+
+### Jalankan frontend + worker bersamaan
+
+```bash
+npm run dev:all
+```
+
+## Scripts
+
+- dev: Menjalankan Vite dev server
+- build: Build production (TypeScript + Vite)
+- preview: Preview hasil build
+- worker: Menjalankan WhatsApp worker
+- dev:all: Menjalankan worker + frontend sekaligus (concurrently)
+
+## Struktur Folder (ringkas)
+
+- src/components: UI components (Sidebar, TopBar, dsb.)
+- src/pages: Halaman utama (Inbox, Handover, Orders, Customers, Broadcast, dsb.)
+- src/data: Mock data untuk demo UI
+- src/lib: API client, navigasi, util
+- worker: WhatsApp worker (Socket.IO + generator)
+
+## Catatan Penggunaan
+
+- Halaman Broadcast saat ini adalah mockup UI (tanpa redirect).
+- Jika kamu ingin menghubungkan ke backend/WA real, biasanya flow-nya: worker menerima event WA → simpan ke InsForge (jika env tersedia) → frontend fetch dari API.

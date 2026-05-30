@@ -1,9 +1,9 @@
 // Fallback data
 export const campaignsData = [
-  { id: 'camp-001', name: 'Diskon Umum', objective: 'Leads', spend: 3250000, leads: 96, cpl: 33854, qualifiedRate: 0.42, status: 'Warning', flag: 'CPL naik 37%' },
-  { id: 'camp-002', name: 'Retargeting Warm Leads', objective: 'Conversion', spend: 2100000, leads: 88, cpl: 23863, qualifiedRate: 0.61, status: 'Healthy', flag: 'Stabil' },
-  { id: 'camp-003', name: 'Lookalike High Intent', objective: 'Leads', spend: 4800000, leads: 174, cpl: 27586, qualifiedRate: 0.55, status: 'Healthy', flag: 'Scale candidate' },
-  { id: 'camp-004', name: 'Promo WhatsApp Click', objective: 'Messages', spend: 2700000, leads: 124, cpl: 21774, qualifiedRate: 0.48, status: 'Monitor', flag: 'High volume' },
+  { id: 'camp-001', name: 'Diskon Umum', objective: 'Leads', spend: 3250000, leads: 96, cpl: 33854, qualified_rate: 0.42, status: 'Warning', flag: 'CPL naik 37%' },
+  { id: 'camp-002', name: 'Retargeting Warm Leads', objective: 'Conversion', spend: 2100000, leads: 88, cpl: 23863, qualified_rate: 0.61, status: 'Healthy', flag: 'Stabil' },
+  { id: 'camp-003', name: 'Lookalike High Intent', objective: 'Leads', spend: 4800000, leads: 174, cpl: 27586, qualified_rate: 0.55, status: 'Healthy', flag: 'Scale candidate' },
+  { id: 'camp-004', name: 'Promo WhatsApp Click', objective: 'Messages', spend: 2700000, leads: 124, cpl: 21774, qualified_rate: 0.48, status: 'Monitor', flag: 'High volume' },
 ];
 
 export const contactsData = [

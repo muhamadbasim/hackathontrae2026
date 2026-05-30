@@ -28,6 +28,106 @@ export const crmApi = {
       alerts: 3
     }
   },
+  createCampaign: async (campaign: {
+    name: string;
+    objective: string;
+    spend?: number;
+    leads?: number;
+    cpl?: number;
+    qualified_rate?: number;
+    status?: string;
+    flag?: string;
+  }) => {
+    if (hasInsforgeEnv) {
+      try {
+        const { data, error } = await insforge.database.from('campaigns').insert([campaign]).select()
+        if (!error && data && data.length > 0) return data[0]
+      } catch (err) {
+        console.error('Failed to create campaign', err)
+        throw err
+      }
+    }
+    const newCampaign = {
+      id: crypto.randomUUID(),
+      ...campaign,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }
+    fallback.campaignsData.push(newCampaign)
+    return newCampaign
+  },
+  updateCampaign: async (id: string, updates: Partial<{
+    name: string;
+    objective: string;
+    spend: number;
+    leads: number;
+    cpl: number;
+    qualified_rate: number;
+    status: string;
+    flag: string;
+  }>) => {
+    if (hasInsforgeEnv) {
+      try {
+        const { data, error } = await insforge.database.from('campaigns').update(updates).eq('id', id).select()
+        if (!error && data && data.length > 0) return data[0]
+      } catch (err) {
+        console.error('Failed to update campaign', err)
+        throw err
+      }
+    }
+    const idx = fallback.campaignsData.findIndex(c => c.id === id)
+    if (idx !== -1) {
+      fallback.campaignsData[idx] = { ...fallback.campaignsData[idx], ...updates, updated_at: new Date().toISOString() }
+      return fallback.campaignsData[idx]
+    }
+    throw new Error('Campaign not found')
+  },
+  linkCampaignConversation: async (campaignId: string, conversationId: string, notes?: string) => {
+    if (hasInsforgeEnv) {
+      try {
+        const { data, error } = await insforge.database.from('campaign_conversations').insert([{
+          campaign_id: campaignId,
+          conversation_id: conversationId,
+          linked_by: 'manual',
+          notes: notes || null
+        }]).select()
+        if (!error && data && data.length > 0) return data[0]
+      } catch (err) {
+        console.error('Failed to link campaign conversation', err)
+        throw err
+      }
+    }
+    return { id: crypto.randomUUID(), campaign_id: campaignId, conversation_id: conversationId, linked_by: 'manual', notes }
+  },
+  unlinkCampaignConversation: async (campaignId: string, conversationId: string) => {
+    if (hasInsforgeEnv) {
+      try {
+        await insforge.database.from('campaign_conversations')
+          .delete()
+          .eq('campaign_id', campaignId)
+          .eq('conversation_id', conversationId)
+        return true
+      } catch (err) {
+        console.error('Failed to unlink campaign conversation', err)
+        throw err
+      }
+    }
+    return true
+  },
+  getCampaignConversations: async (campaignId: string) => {
+    if (hasInsforgeEnv) {
+      try {
+        const { data, error } = await insforge.database
+          .from('campaign_conversations')
+          .select('*, conversations(*, contacts(*))')
+          .eq('campaign_id', campaignId)
+        if (!error && data) return data
+      } catch (err) {
+        console.error('Failed to get campaign conversations', err)
+      }
+    }
+    return []
+  },
   listCampaigns: async () => {
     if (hasInsforgeEnv) {
       const { data, error } = await insforge.database.from('campaigns').select()

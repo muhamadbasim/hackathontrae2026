@@ -26,7 +26,7 @@ type WhatsAppStatus = 'Loading' | 'Disconnected' | 'Connected'
 
 function App() {
   const { user, loading, setUser } = useInsforgeAuth()
-  const [activePath, setActivePath] = useState('/dashboard')
+  const [activePath, setActivePath] = useState('/chat')
   const [waStatus, setWaStatus] = useState<WhatsAppStatus>('Loading')
   const [qrCode, setQrCode] = useState('')
 
@@ -88,6 +88,9 @@ function App() {
 
   const renderPage = () => {
     const props = { waStatus, qrCode }
+    if (activePath.startsWith('/flows/')) {
+      return <WorkflowPage {...props} activePath={activePath} onNavigate={setActivePath} />
+    }
     switch (activePath) {
       case '/dashboard': return <DashboardPage {...props} />
       case '/chat': return <InboxPage {...props} />
@@ -96,7 +99,7 @@ function App() {
       case '/customers': return <CustomersPage {...props} />
       case '/products': return <ProductsPage {...props} />
       case '/broadcast': return <BroadcastPage {...props} />
-      case '/flows': return <WorkflowPage {...props} />
+      case '/flows': return <WorkflowPage {...props} activePath={activePath} onNavigate={setActivePath} />
       case '/ai-agents': return <AiAgentsPage {...props} />
       case '/ai': return <AiPlaygroundPage {...props} />
       case '/knowledge': return <KnowledgePage {...props} />
@@ -105,11 +108,13 @@ function App() {
     }
   }
 
+  const handleLogout = () => setUser(null)
+
   return (
     <div className="ocm-shell">
-      <Sidebar activePath={activePath} onNavigate={setActivePath} />
+      <Sidebar activePath={activePath} onNavigate={setActivePath} onLogout={handleLogout} />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <TopBar onLogout={() => setUser(null)} />
+        {activePath !== '/chat' && <TopBar onLogout={() => setUser(null)} />}
         {renderPage()}
         <BottomNav activePath={activePath} onNavigate={setActivePath} />
       </div>

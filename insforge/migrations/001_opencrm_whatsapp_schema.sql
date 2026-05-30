@@ -108,6 +108,7 @@ create table if not exists public.products (
 create table if not exists public.broadcast_jobs (
   id uuid primary key default gen_random_uuid(),
   organization_id uuid references public.organizations(id) on delete cascade,
+  campaign_id uuid references public.campaigns(id) on delete set null,
   title text not null,
   message text not null,
   status text default 'draft',
@@ -178,3 +179,16 @@ create table if not exists public.whatsapp_alerts (
   error text,
   created_at timestamptz default now()
 );
+
+create table if not exists public.campaign_conversations (
+  id uuid primary key default gen_random_uuid(),
+  campaign_id uuid references public.campaigns(id) on delete cascade not null,
+  conversation_id uuid references public.conversations(id) on delete cascade not null,
+  linked_by text default 'manual',
+  notes text,
+  created_at timestamptz default now(),
+  unique(campaign_id, conversation_id)
+);
+
+create index idx_campaign_conversations_campaign on public.campaign_conversations(campaign_id);
+create index idx_campaign_conversations_conversation on public.campaign_conversations(conversation_id);

@@ -105,22 +105,22 @@ wa.setCallback('onMessage', async (msg) => {
   if (lower === 'ping') {
     replyText = 'pong'
   } else if (['menu', 'halo', 'hai'].includes(lower)) {
-    replyText = `Halo! Saya Autonomous CRM Agent.\n\nPilih menu:\n1. Info performa campaign\n2. Buat campaign baru\n3. Pause ad bermasalah\n\nBalas angka atau keyword.`
+    replyText = `Halo! 👋 Saya asisten CRM kamu. Ada yang bisa saya bantu hari ini?\n\nKamu bisa coba beberapa hal ini:\n1. Cek performa campaign\n2. Buat campaign baru\n3. Pause ad yang bermasalah\n\nBalas angka atau keyword aja ya.`
   } else if (lower === '1' || lower === 'info') {
-    replyText = `⚠️ Alert CRM + Ads:\nCPL campaign "Diskon Umum" naik 37% dibanding baseline.\nLead qualified turun ke 42%.\n\nRekomendasi: balas "Pause" untuk menghentikan creative bermasalah.`
+    replyText = `Eh, ada info penting nih! ⚠️\n\nCPL buat campaign "Diskon Umum" lagi naik 37% dari biasanya, terus lead qualified-nya malah turun ke 42%.\n\nMending kita "Pause" aja dulu gimana? Biar budgetnya nggak boncos.`
   } else if (lower === '2' || lower === 'buat') {
     userState[remoteJid] = { step: 'awaiting_budget' }
-    replyText = `Baik, kita buat campaign baru.\nBerapa budget harian? Contoh: 150000`
+    replyText = `Siap, ayo kita bikin campaign baru! 🚀\n\nKira-kira mau pasang budget berapa per harinya? Kasih tau aja angkanya, misal 150000.`
   } else if (userState[remoteJid]?.step === 'awaiting_budget' && (/\d{4,}/.test(lower) || lower.includes('ribu'))) {
     userState[remoteJid].budget = lower
     userState[remoteJid].step = 'awaiting_audience'
-    replyText = `Budget tercatat.\nSiapa target audiensnya? Contoh: Wanita 25-35, Jakarta.`
+    replyText = `Oke, budget udah dicatat ya. 👌\n\nTerus, siapa nih target audiensnya? Kasih tau kriteria spesifiknya, misal: Wanita 25-35 di Jakarta.`
   } else if (userState[remoteJid]?.step === 'awaiting_audience' && ['pria', 'wanita', 'indonesia', 'jakarta', 'bandung', 'surabaya'].some(w => lower.includes(w))) {
     userState[remoteJid].audience = text
     userState[remoteJid].step = 'awaiting_launch'
-    replyText = `Draft Campaign:\nObjective: Leads\nAudience: sesuai input Anda\nCopy: Dapatkan penawaran terbaik hari ini. Klik WhatsApp untuk konsultasi gratis.\n\nBalas "Launch" untuk menjalankan campaign.`
+    replyText = `Sip! Ini draft campaign-nya:\n\n🎯 Objective: Leads\n👥 Audience: sesuai yang kamu minta tadi\n📝 Copy: "Dapatkan penawaran terbaik hari ini. Klik WhatsApp untuk konsultasi gratis."\n\nKalau udah oke, balas "Launch" ya buat kita jalanin sekarang.`
   } else if (lower === 'launch' && userState[remoteJid]?.step === 'awaiting_launch') {
-    replyText = `🚀 Campaign berhasil diluncurkan ke Meta Ads!\nSaya akan pantau CPL dan kualitas leads secara otomatis.`
+    replyText = `🚀 Mantap! Campaign-nya udah jalan di Meta Ads ya.\n\nTenang aja, bakal aku pantau terus CPL sama kualitas lead-nya secara otomatis. Nanti aku kabarin kalau ada apa-apa!`
     
     if (hasInsforgeEnv) {
       await insforge.database.from('campaigns').insert({
@@ -134,9 +134,9 @@ wa.setCallback('onMessage', async (msg) => {
     }
     delete userState[remoteJid]
   } else if (lower === '3' || lower === 'pause') {
-    replyText = `✅ Done! Creative 'Diskon Umum' telah di-pause.\nSaya akan terus memantau campaign lainnya.`
+    replyText = `✅ Siap, creative 'Diskon Umum' udah aku pause ya.\n\nAku lanjut pantau campaign lainnya, kalau ada kendala lagi langsung aku infoin!`
   } else {
-    replyText = `Saya belum paham. Balas "menu" untuk melihat pilihan yang tersedia.`
+    replyText = `Aduh, maaf ya aku kurang paham maksudnya. 😅\n\nBoleh balas "menu" aja biar kita liat apa aja yang bisa aku bantu?`
   }
 
   if (replyText) {
