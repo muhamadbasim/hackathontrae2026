@@ -49,15 +49,26 @@ function App() {
     })
 
     if (hasInsforgeEnv) {
-      const channel = insforge.realtime.channel('crm:demo')
-      channel.on('postgres_changes', { event: '*', schema: 'public' }, payload => {
-        console.log('Realtime update:', payload)
-      }).subscribe((status) => {
-        console.log('Realtime status:', status)
-      })
+      const channelName = 'crm:demo'
+      
+      const setupRealtime = async () => {
+        try {
+          await insforge.realtime.connect()
+          await insforge.realtime.subscribe(channelName)
+          
+          insforge.realtime.on('postgres_changes', (payload) => {
+            console.log('Realtime update:', payload)
+          })
+        } catch (err) {
+          console.error('Realtime setup error:', err)
+        }
+      }
+
+      setupRealtime()
       
       return () => {
-        insforge.realtime.removeChannel(channel)
+        insforge.realtime.unsubscribe(channelName)
+        insforge.realtime.disconnect()
         waSocket.disconnect()
       }
     }

@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# WhatsApp Baileys session data
+auth_info_baileys/
+
+# Environment files (local only)
+.env.local

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { OpenCrmSectionHeader } from '../components/opencrm/shared'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
+import { Button } from '../components/ui/Button'
+import { WhatsAppQrGate } from '../components/WhatsAppQrGate'
 import { hasInsforgeEnv } from '../lib/insforge'
 
 export default function SettingsPage({ waStatus }: { waStatus: string }) {
+  const [showQrModal, setShowQrModal] = useState(false)
+
   return (
     <main className="ocm-page">
       <OpenCrmSectionHeader title="Settings" subtitle="Konfigurasi sistem dan integrasi." />
@@ -21,8 +25,21 @@ export default function SettingsPage({ waStatus }: { waStatus: string }) {
               <span className="text-muted-foreground">Worker URL</span>
               <span className="font-mono text-xs bg-muted px-2 py-1 rounded">{import.meta.env.VITE_WA_WORKER_URL || 'http://localhost:3001'}</span>
             </div>
+            <Button 
+              onClick={() => setShowQrModal(!showQrModal)} 
+              variant={waStatus === 'Connected' ? 'outline' : 'default'}
+              className="w-full"
+            >
+              {waStatus === 'Connected' ? 'Show QR Code' : 'Connect WhatsApp'}
+            </Button>
           </div>
         </Card>
+
+        {showQrModal && (
+          <Card className="p-6">
+            <WhatsAppQrGate onConnected={() => setShowQrModal(false)} />
+          </Card>
+        )}
 
         <Card className="p-6">
           <h3 className="font-bold mb-4">InsForge Backend</h3>
