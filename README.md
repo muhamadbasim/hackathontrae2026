@@ -1,6 +1,21 @@
 # Autonomous Leads and Customer Relationship Management WhatsApp Agent
 
-Aplikasi CRM WhatsApp dengan mockup UI (Inbox, Handover, Orders, Customers, Broadcast, Workflow, AI Agents) dan worker WhatsApp untuk simulasi koneksi WhatsApp (QR) + sinkronisasi ke InsForge (opsional).
+**Autonomous Leads and Customer Relationship Management WhatsApp Agent** is an end-to-end system that turns paid traffic into structured WhatsApp conversations, handled by **agentic AI**, and closed through an **automated closing + follow-up engine**.
+
+The problem I’m solving is simple but expensive: many businesses can run ads, but they don’t have an operational machine to (1) respond instantly, (2) qualify leads, (3) follow up consistently, and (4) close deals—without burning out the CS team.
+
+What makes this different: **you can run ads directly from chat**, without having to open or manage the Meta Ads dashboard.
+- Create campaigns, set budgets, and define targeting straight from WhatsApp
+- Receive performance insights (e.g., CPL spikes, lead quality drops) as chat notifications
+- Execute quick actions like **Pause / Resume / Scale** by replying with a keyword
+
+This project combines:
+- A **WhatsApp Agent** that stays always-on (QR/worker) to receive and reply to messages.
+- A **CRM Workspace** for Inbox, Handover, Orders, Customers, Broadcast, and Workflow (UI mockups to simulate operations).
+- An **agentic AI runtime (Openclaw/Hermes)** that can run multi-step workflows, use tools, retain context, and operate across sessions/channels.
+- A **closing engine** that executes sales scripts, handles objections, and performs stateful follow-ups (not just a basic Q&A chatbot).
+
+The goal: build an **“ad machine that can close”**—not just generating leads, but converting them into revenue with scalable, agent-driven operations.
 
 ## Capture
 
